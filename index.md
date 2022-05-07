@@ -1,8 +1,8 @@
-## Welcome to GitHub Pages
+## Processamento Digital de Imagens (PDI)
 
-You can use the [editor on GitHub](https://github.com/AllysonFMB/Processamento-Digital-de-Imagens/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+Esta página se refere aos exercícios da 1º unidade da matéria de [PDI-DCA-UFRN](https://agostinhobritojr.github.io/tutorial/pdi/#_pref%C3%A1cio).
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+
 
 ### Markdown
 
