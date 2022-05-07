@@ -26,6 +26,7 @@ Utilizando o programa exemplos/pixels.cpp como referência, implemente um progra
 Pontos: p_1 = 50 e p_2 = 200
 
 Saída:
+![Saida regions](/Processamento-Digital-de-Imagens/Regions/biel_negativo.png)
 
 
 
