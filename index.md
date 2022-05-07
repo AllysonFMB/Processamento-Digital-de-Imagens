@@ -2,13 +2,33 @@
 
 Esta página se refere aos exercícios da 1º unidade da matéria de [PDI-DCA-UFRN](https://agostinhobritojr.github.io/tutorial/pdi/#_pref%C3%A1cio).
 
+### Exercício Regions
+
+Utilizando o programa exemplos/pixels.cpp como referência, implemente um programa regions.cpp. Esse programa deverá solicitar ao usuário as coordenadas de dois pontos P1 e P2 localizados dentro dos limites do tamanho da imagem e exibir que lhe for fornecida. Entretanto, a região definida pelo retângulo de vértices opostos definidos pelos pontos P1 e P2 será exibida com o negativo da imagem na região correspondente.
 
 
-### Markdown
+```c++
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+  cv::Mat image;
+  image= cv::imread("biel.png",cv::IMREAD_GRAYSCALE);
+  if(!image.data)
+    std::cout << "nao abriu a img" << std::endl;
 
-```markdown
+    for(int i=p_1;i<p_2;i++){
+    for(int j=p_1;j<p_2;j++){
+      image.at<uchar>(i,j) = 255 - image.at<uchar>(i,j);
+    }
+  }
+  
+  cv::imshow("Janela", image);
+  cv::waitKey();
+```
+Pontos: p_1 = 50 e p_2 = 200
+
+Saída:
+
+
+
 Syntax highlighted code block
 
 # Header 1
