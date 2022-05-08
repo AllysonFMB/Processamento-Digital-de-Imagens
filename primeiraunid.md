@@ -6,7 +6,7 @@ Esta página se refere aos exercícios da 1º unidade da matéria de [PDI-DCA-UF
 
 Utilizando o programa exemplos/pixels.cpp como referência, implemente um programa regions.cpp. Esse programa deverá solicitar ao usuário as coordenadas de dois pontos P1 e P2 localizados dentro dos limites do tamanho da imagem e exibir que lhe for fornecida. Entretanto, a região definida pelo retângulo de vértices opostos definidos pelos pontos P1 e P2 será exibida com o negativo da imagem na região correspondente.
 
-### regions.cpp
+#### [regions.cpp](https://github.com/AllysonFMB/Processamento-Digital-de-Imagens/blob/gh-pages/Regions/main.cpp)
 
 ```c++ 
 
@@ -43,7 +43,7 @@ Saída:
 
 Utilizando o programa exemplos/pixels.cpp como referência, implemente um programa trocaregioes.cpp. Seu programa deverá trocar os quadrantes em diagonal na imagem. Explore o uso da classe Mat e seus construtores para criar as regiões que serão trocadas.
 
-### trocaregioes.cpp
+#### [trocaregioes.cpp](https://github.com/AllysonFMB/Processamento-Digital-de-Imagens/blob/gh-pages/Trocaregioes/main.cpp)
 ```c++
 cv::Mat image, image_aux;
     int width, height;
@@ -87,6 +87,134 @@ Etapas das trocas de regiões:
 Saída:
 
 ![Saída da troca de regioes](https://github.com/AllysonFMB/Processamento-Digital-de-Imagens/blob/gh-pages/Trocaregioes/biel_6.png)
+
+
+### 2. Exercício contar bolhas e buracos
+
+O programa labeling.cpp tem como limitação se existir mais de 255 objetos em cena, para solucionar esse possível problema pode se alterar o tipo da variável de rotulagem (newVal) para ponto flutuante.
+
+```c++
+int cv::floodFill(cv::InputOutputArray image, cv::Point seedPoint, cv::Scalar newVal);
+```
+Aprimore o algoritmo de contagem apresentado para identificar regiões com ou sem buracos internos que existam na cena. Assuma que objetos com mais de um buraco podem existir. Inclua suporte no seu algoritmo para não contar bolhas que tocam as bordas da imagem. Não se pode presumir, a priori, que elas tenham buracos ou não.
+
+#### [labeling.cpp](https://github.com/AllysonFMB/Processamento-Digital-de-Imagens/blob/gh-pages/Labeling/main.cpp)
+```c++
+int main(int argc, char **argv)
+{
+  cv::Mat image, realce;
+  int width, height;
+  int nobjects, counter;
+
+  cv::Point p;
+  image = cv::imread("D:/UFRN/22.1/PDI/labeling/bolhas.png", cv::IMREAD_GRAYSCALE);
+
+  if (!image.data)
+  {
+    std::cout << "imagem nao carregou corretamente\n";
+    return (-1);
+  }
+  cv::imshow("imagem original", image);
+
+  width = image.cols;
+  height = image.rows;
+  std::cout << width << "x" << height << std::endl;
+
+  p.x = 0;
+  p.y = 0;
+
+  /*EXCLUIR BORDAS*/
+  // Excluir elementos da primeira e última linha
+  for (int i = 0; i < height; i++)
+  {
+    if (image.at<uchar>(0, i) == 255)
+    {
+      cv::floodFill(image, Point(i, 0), 0);
+    }
+    if (image.at<uchar>(width - 1, i) == 255)
+    {
+      cv::floodFill(image, Point(i, width - 1), 0);
+    }
+  }
+  // Excluir elementos da primeira e última coluna
+  for (int i = 0; i < width; i++)
+  {
+    if (image.at<uchar>(i, 0) == 255)
+    {
+      cv::floodFill(image, Point(0, i), 0);
+    }
+    if (image.at<uchar>(i, height - 1) == 255)
+    {
+      cv::floodFill(image, Point(height - 1, i), 0);
+    }
+  }
+  /**/
+  cv::imwrite("image_semborda.png", image);
+
+  /*BUSCAR OBJETOS PRESENTES*/
+  nobjects = 0;
+  for (int i = 0; i < height; i++)
+  {
+    for (int j = 0; j < width; j++)
+    {
+      if (image.at<uchar>(i, j) == 255)
+      {
+        // achou um objeto
+        nobjects++;
+        p.x = j;
+        p.y = i;
+        // preenche o objeto com o contador
+        cv::floodFill(image, p, nobjects);
+      }
+    }
+  }
+  /**/
+  cv::equalizeHist(image, realce);
+  cv::imshow("imagem contada", image);
+  cv::imshow("realce", realce);
+
+  cv::imwrite("image_realce.png", realce);
+
+  // PINTAR FUNDO DE BRANCO P/ CONTAGEM DE BURACOS--
+  cv::floodFill(image, Point(0, 0), 255);
+
+  /*PROCURANDO BURACOS */
+  counter = 0;
+  for (int i = 0; i < height; i++)
+  {
+    for (int j = 0; j < width; j++)
+    {
+      if (image.at<uchar>(i, j) == 0 && (int)image.at<uchar>(i, j - 1) > counter)
+      { // se encontrar um buraco e já não tiver contado a bolha
+        // Found a bubble with a hole
+        counter++;
+        p.x = j - 1;
+        p.y = i;
+        cv::floodFill(image, p, counter);
+      }
+    }
+  }
+  /**/
+
+  std::cout << "bolhas: " << nobjects << " e bolhas com buracos: " << counter << std::endl;
+  cv::imshow("image final", image);
+  cv::imwrite("labeling.png", image);
+  cv::waitKey();
+  return 0;
+}
+```
+Etapas de contagem:
+
+![Etapas do funcionamento do código](https://github.com/AllysonFMB/Processamento-Digital-de-Imagens/blob/gh-pages/Labeling/labeling_final.png)
+
+Saída:
+
+bolhas: 21 e bolhas com buracos: 7
+
+
+
+
+
 
 # Header 1
 ## Header 2
