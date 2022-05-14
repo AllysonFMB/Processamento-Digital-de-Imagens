@@ -215,7 +215,7 @@ bolhas: 21 e bolhas com buracos: 7
 
 Utilizando o programa exemplos/histogram.cpp como referência, implemente um programa equalize.cpp. Este deverá, para cada imagem capturada, realizar a equalização do histogram antes de exibir a imagem. Teste sua implementação apontando a câmera para ambientes com iluminações variadas e observando o efeito gerado. Assuma que as imagens processadas serão em tons de cinza.
 
-#### [equalize.cpp](https://github.com/AllysonFMB/Processamento-Digital-de-Imagens/blob/gh-pages/Labeling/main.cpp)
+#### [equalize.cpp](https://github.com/AllysonFMB/Processamento-Digital-de-Imagens/blob/gh-pages/Equalize/main.cpp)
 ```c++
 int main(int argc, char **argv)
 {
@@ -261,5 +261,5 @@ int main(int argc, char **argv)
 
 saída: 
 
-![Imagem equalizada e normal](https://github.com/AllysonFMB/Processamento-Digital-de-Imagens/blob/gh-pages/Labeling/labeling_final.png)
+![Imagem equalizada e normal](https://github.com/AllysonFMB/Processamento-Digital-de-Imagens/blob/gh-pages/Equalize/saidaequalize.png)
 
