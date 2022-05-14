@@ -211,32 +211,55 @@ Saída:
 
 bolhas: 21 e bolhas com buracos: 7
 
+### 3. Equalize
 
+Utilizando o programa exemplos/histogram.cpp como referência, implemente um programa equalize.cpp. Este deverá, para cada imagem capturada, realizar a equalização do histogram antes de exibir a imagem. Teste sua implementação apontando a câmera para ambientes com iluminações variadas e observando o efeito gerado. Assuma que as imagens processadas serão em tons de cinza.
 
+#### [equalize.cpp](https://github.com/AllysonFMB/Processamento-Digital-de-Imagens/blob/gh-pages/Labeling/main.cpp)
+```c++
+int main(int argc, char **argv)
+{
+    cv::Mat image, equalizada;
+    cv::VideoCapture cap;
+    int key;
 
+    cap.open(0);
 
+    if (!cap.isOpened())
+    {
+        std::cout << "cameras indisponiveis";
+        return -1;
+    }
 
-# Header 1
-## Header 2
-### Header 3
+    while (1)
+    {
+        // captura imagem
+        cap >> image;
+        // Converter para grayscale
+        cv::cvtColor(image, image, cv::COLOR_BGR2GRAY);
+        // histograma equalizado
+        cv::equalizeHist(image, equalizada);
 
-- Bulleted
-- List
+        cv::namedWindow("normal", cv::WINDOW_NORMAL);
+        cv::namedWindow("equalizada", cv::WINDOW_NORMAL);
 
-1. Numbered
-2. List
+        cv::imshow("normal", image);
+        cv::imshow("equalizada", equalizada);
 
-**Bold** and _Italic_ and `Code` text
+        cv::imwrite("frame_normal", image);
+        cv::imwrite("frame_equalizada", equalizada);
 
-[Link](url) and ![Image](src)
+        key = cv::waitKey(30);
+        if (key == 30)
+            break;
+    }
+    cv::destroyAllWindows();
+
+    return 0;
+}
 ```
 
-For more details see [Basic writing and formatting syntax](https://docs.github.com/en/github/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax).
+saída: 
 
-### Jekyll Themes
+![Imagem equalizada e normal](https://github.com/AllysonFMB/Processamento-Digital-de-Imagens/blob/gh-pages/Labeling/labeling_final.png)
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/AllysonFMB/Processamento-Digital-de-Imagens/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
