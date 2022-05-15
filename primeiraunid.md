@@ -263,3 +263,68 @@ saída:
 
 ![Imagem equalizada e normal](https://github.com/AllysonFMB/Processamento-Digital-de-Imagens/blob/gh-pages/Equalize/saidaequalize.png)
 
+### 3.1 Motion detector
+
+Utilizando o programa exemplos/histogram.cpp como referência, implemente um programa motiondetector.cpp. Este deverá continuamente calcular o histograma da imagem (apenas uma componente de cor é suficiente) e compará-lo com o último histograma calculado. Quando a diferença entre estes ultrapassar um limiar pré-estabelecido, ative um alarme. Utilize uma função de comparação que julgar conveniente.
+
+O algoritmo abaixo é composto principalmente pela função de criar um histograma, utilizada para criar os histogramas que irão ser comparados, o método de comporação foi utilizando a função:
+
+```c++
+double cv::compareHist(InputArray H1, InputArray H2, int método)	
+```
+Onde retorna o valor da comparação, as variáveis H1 e H2 são os histogramas para serem comparados, e por fim, o método de comparação, que podem ser das seguintes formas:
+
+  - cv::HISTCMP_CORREL = 0,
+  - cv::HISTCMP_CHISQR = 1,
+  - cv::HISTCMP_INTERSECT = 2,
+  - cv::HISTCMP_BHATTACHARYYA = 3,
+  - cv::HISTCMP_HELLINGER = HISTCMP_BHATTACHARYYA,
+  - cv::HISTCMP_CHISQR_ALT = 4,
+  - cv ::HISTCMP_CHISQR_ALT = 4: HITCMP_KL_DIV = 5
+
+
+### [motiondetector.cpp](https://github.com/AllysonFMB/Processamento-Digital-de-Imagens/blob/gh-pages/Motiondetector/main.cpp)
+```c++
+Mat histograma(Mat const imagem, int bins){
+    int histSize[] = {bins}; 
+    float lranges[] = {0, 256}; 
+    const float* ranges[] = {lranges};
+    Mat hist;
+    int channels[]={0};
+    calcHist(&imagem, 1, channels, Mat(), hist, 1, histSize, ranges, true, false);
+    return hist;
+}
+
+int main(){
+    Mat imagem, hist_novo, hist_anterior; 
+    int temp=0;
+    double compara;
+
+    VideoCapture cap; 
+    cap.open(0);
+    if(!cap.isOpened()){
+        cout << "cameras indisponiveis";
+        return -1;
+    }
+
+    cap >> imagem;
+    hist_novo = histograma(imagem, 256);
+    while(1){
+        hist_novo.copyTo(hist_anterior);
+        cap >> imagem;
+        cvtColor(imagem, imagem, COLOR_BGR2GRAY);
+        hist_novo = histograma(imagem, 256);
+
+        compara = compareHist(hist_novo, hist_anterior, 3);
+        if(compara >= 0.07) cout<<"movimento detectado - num: "<<++temp<<endl;
+
+        imshow("Detector de movimento", imagem);
+        if(waitKey(30) >= 0) break;
+    }
+    return 0;
+}
+```
+
+Saída:
+
+![frame do vídeo de saída para detecção de movimento](https://github.com/AllysonFMB/Processamento-Digital-de-Imagens/blob/gh-pages/Motiondetector/saida_videodetect.png)
