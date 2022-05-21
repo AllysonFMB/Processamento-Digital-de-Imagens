@@ -601,12 +601,15 @@ int main(int argvc, char** argv){
 ```
 
 Imagem original:
+
 ![imagem da praia original](https://github.com/AllysonFMB/Processamento-Digital-de-Imagens/blob/gh-pages/Tiltshift/original.jpg)
 
 Interface:
+
 ![interface dos trackbar](https://github.com/AllysonFMB/Processamento-Digital-de-Imagens/blob/gh-pages/Tiltshift/interface.png)
 
 Saída:
+
 ![imagem da praia saida](https://github.com/AllysonFMB/Processamento-Digital-de-Imagens/blob/gh-pages/Tiltshift/tiltyshift.jpg)
 
 
