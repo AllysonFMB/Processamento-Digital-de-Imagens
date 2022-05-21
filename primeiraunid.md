@@ -607,7 +607,7 @@ Interface:
 ![interface dos trackbar](https://github.com/AllysonFMB/Processamento-Digital-de-Imagens/blob/gh-pages/Tiltshift/interface.png)
 
 Saída:
-![imagem da praia saida](https://github.com/AllysonFMB/Processamento-Digital-de-Imagens/blob/gh-pages/Tiltshift/tiltshift.jpg)
+![imagem da praia saida](https://github.com/AllysonFMB/Processamento-Digital-de-Imagens/blob/gh-pages/Tiltshift/tiltyshift.jpg)
 
 
 
