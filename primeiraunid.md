@@ -483,7 +483,7 @@ Utilizando o programa exemplos/addweighted.cpp como referência, implemente um p
 - um ajuste para regular a força de decaimento da região borrada;
 - um ajuste para regular a posição vertical do centro da região que entrará em foco. Finalizado o programa, a imagem produzida deverá ser salva em arquivo.
 
-### [tiltishift.cpp]()
+### [tiltishift.cpp](https://github.com/AllysonFMB/Processamento-Digital-de-Imagens/tree/gh-pages/Tiltshift/main.cpp)
 ```c++
 
 using namespace cv;
@@ -599,11 +599,20 @@ int main(int argvc, char** argv){
 }
 
 ```
-Interface:
 
 Imagem original:
 
+![imagem da praia original](https://github.com/AllysonFMB/Processamento-Digital-de-Imagens/blob/gh-pages/Tiltshift/original.jpg)
+
+Interface:
+
+![interface dos trackbar](https://github.com/AllysonFMB/Processamento-Digital-de-Imagens/blob/gh-pages/Tiltshift/interface.png)
+
 Saída:
+
+![imagem da praia saida](https://github.com/AllysonFMB/Processamento-Digital-de-Imagens/blob/gh-pages/Tiltshift/tiltshift.jpg)
+
+
 
 
 
