@@ -6,7 +6,7 @@ Esta página se refere aos exercícios da 2º unidade da matéria de [PDI-DCA-UF
 
 Utilizando o programa exemplos/dft.cpp como referência, implemente o filtro homomórfico para melhorar imagens com iluminação irregular. Crie uma cena mal iluminada e ajuste os parâmetros do filtro homomórfico para corrigir a iluminação da melhor forma possível. Assuma que a imagem fornecida é em tons de cinza.
 
-#### [homomorgico.cpp](https://github.com/AllysonFMB/Processamento-Digital-de-Imagens/blob/gh-pages/Regions/main.cpp)
+#### [homomorgico.cpp](https://github.com/AllysonFMB/Processamento-Digital-de-Imagens/blob/gh-pages/Homomorfico/main.cpp)
 
 - Função filtroHomomorfico, ela recebe os dados de Gamma L, Gamma H, C e o D0:
 
@@ -119,3 +119,14 @@ void on_trackbar(int, void*) {
     imwrite("saida.png", filtrada);
 }
 ```
+Entrada:
+
+![imagem original estação de trem](https://github.com/AllysonFMB/Processamento-Digital-de-Imagens/blob/gh-pages/Homomorfico/estacao.jpg)
+
+Realizando o filtro:
+
+![Aplicação do filtro, dela da interface do usuário modificando os sliders, tela da imagem original e a tela do filtro aplicado](https://github.com/AllysonFMB/Processamento-Digital-de-Imagens/blob/gh-pages/Homomorfico/filtrando.png)
+
+Saída:
+
+![imagem com aplicação do filtro](https://github.com/AllysonFMB/Processamento-Digital-de-Imagens/blob/gh-pages/Homomorfico/saida.png)
