@@ -130,3 +130,52 @@ Realizando o filtro:
 Saída:
 
 ![imagem com aplicação do filtro](https://github.com/AllysonFMB/Processamento-Digital-de-Imagens/blob/gh-pages/Homomorfico/saida.png)
+
+### 3. Kmeans
+
+Utilizando o programa kmeans.cpp como exemplo prepare um programa exemplo onde a execução do código se dê usando o parâmetro nRodadas=1 e inciar os centros de forma aleatória usando o parâmetro KMEANS_RANDOM_CENTERS ao invés de KMEANS_PP_CENTERS. Realize 10 rodadas diferentes do algoritmo e compare as imagens produzidas. Explique porque elas podem diferir tanto.
+
+O kmeans é executado da seguinte forma:
+
+A matriz com as amostras samples deve conter em cada linha uma das amostras a ser processada pela função disponível pelo opencv. nClusters informa a quantidade de aglomerados que se deseja obter, no nosso caso 8. A matriz rotulos é um objeto do tipo Mat preenchido com elementos do tipo int, onde cada elemento identifica a classe à qual pertence a amostra na matriz samples.
+
+No exemplo, um máximo de até 10000 iterações ou tolerância de 0.0001 devem ser atingidos para finalizar o algoritmo. O algoritmo é repetido por uma quantidade de vezes definida por nRodadas (foi utilizada nRodadas = 1). A rodada que produz a menor soma de distâncias dos pontos para seus respectivos centros é escolhida como vencedora. Foi utilizada a inicialização dos centros de forma aleatória com KMEANS_RANDOM_CENTERS.
+
+#### [kmeans.cpp](https://github.com/AllysonFMB/Processamento-Digital-de-Imagens/tree/gh-pages/kmeans/main.cpp)
+```c++
+for (int i = 0; i < 10; i++)
+  {
+
+    kmeans(samples,
+           nClusters,
+           rotulos,
+           TermCriteria(TermCriteria::MAX_ITER | TermCriteria::EPS, 10000, 0.0001),
+           nRodadas,
+           KMEANS_RANDOM_CENTERS,
+           centros);
+
+    Mat rotulada(img.size(), img.type());
+    for (int y = 0; y < img.rows; y++)
+    {
+      for (int x = 0; x < img.cols; x++)
+      {
+        int indice = rotulos.at<int>(y + x * img.rows, 0);
+        rotulada.at<Vec3b>(y, x)[0] = (uchar)centros.at<float>(indice, 0);
+        rotulada.at<Vec3b>(y, x)[1] = (uchar)centros.at<float>(indice, 1);
+        rotulada.at<Vec3b>(y, x)[2] = (uchar)centros.at<float>(indice, 2);
+      }
+    }
+    imshow("clustered image", rotulada);
+    nome1[13] = i + '0';
+    imwrite(nome1, rotulada);
+  }
+```
+Entrada:
+
+![imagem de Rick and Morty](https://github.com/AllysonFMB/Processamento-Digital-de-Imagens/blob/gh-pages/kmeans/rickandmorty.png)
+
+Saída: 
+
+![kmeans interações](https://github.com/AllysonFMB/Processamento-Digital-de-Imagens/blob/gh-pages/kmeans/rickandmorty_gif.gif)
+
+A cada rodada a imagem apresentam cores diferentes, isso acontece por inicilaizar os pontos do centro de forma aleatória e o algoritmo não estabailiza por usar somente o número de rodadas igual a 1.
