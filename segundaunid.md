@@ -135,7 +135,7 @@ Saída:
 
 Utilizando os programas exemplos/canny.cpp e exemplos/pontilhismo.cpp como referência, implemente um programa cannypoints.cpp. A idéia é usar as bordas produzidas pelo algoritmo de Canny para melhorar a qualidade da imagem pontilhista gerada. A forma como a informação de borda será usada é livre.
 
-#### [cannypoints.cpp]
+#### [cannypoints.cpp](https://github.com/AllysonFMB/Processamento-Digital-de-Imagens/blob/gh-pages/Cannypoints/main.cpp)
 ```c++
 #define STEP 6
 #define JITTER 4
@@ -296,9 +296,15 @@ Canny(image_bw, border, limite_inferior, 3 * limite_inferior);
 
 Entrada:
 
-![Imagem da Série Love Death + Robots]
+![Imagem da Série Love Death + Robots](https://github.com/AllysonFMB/Processamento-Digital-de-Imagens/blob/gh-pages/Cannypoints/lovedead.jpg)
+
+Etapas do algoritmo:
+
+![etapas do algoritmo](https://github.com/AllysonFMB/Processamento-Digital-de-Imagens/blob/gh-pages/Cannypoints/cannypointresultado.png)
 
 Saída:
+
+![Imagem pontilhista com canny](https://github.com/AllysonFMB/Processamento-Digital-de-Imagens/blob/gh-pages/Cannypoints/cannypoints.png)
 
 
 ### 3. Kmeans
